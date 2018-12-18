@@ -15,7 +15,7 @@ var threeSum = function(nums) {
         for (var j= i+1; j< nums.length; j++){
             temp=[];
             for (var k= j+1; k< nums.length; k++){
-                temp.push(nums[i]);
+                temp.push(nums[i]); 
                 temp.push(nums[j]);
                 temp.push(nums[k]);
 //                console.log('i:' + i + 'j:' + j + 'k:' +k)
