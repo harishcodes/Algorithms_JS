@@ -3,114 +3,63 @@
  * @return {boolean}
  */
 var PredictTheWinner = function(nums) {
-    
-    var pl1=[],pl2=[], st=1,end=nums.length-1,pl1ToPick = false
-    pl1.push(nums[st-1])
-    
-    while(st !== end){
-        
-        if (pl1ToPick){
-            pl1ToPick = false
-            if (nums[st] >= nums[end]){
-                pl1.push(nums[st])
-                st++
-            } else {
-                pl1.push(nums[end])
-                end --
-            }
-        } else {
-            pl1ToPick = true
-            if (nums[st] >= nums[end]){
-                pl2.push(nums[st])
-                st++
-            } else {
-                pl2.push(nums[end])
-                end --
-            }            
-        }
-    }
-    
-    if (st === end){
-        if (pl1ToPick){
-            pl1.push(nums[st])
-        } else {
-            pl2.push(nums[st])
-        }
-    }
-    
-    
-    console.log(pl1,pl2)
-    
-    
-    var pl1Sum = pl1.reduce((a,b) => a+b,0)
-    var pl2Sum = pl2.reduce((a,b) => a+b,0)
-    
-    console.log(pl1Sum,pl2Sum)
-    
 
-    if (pl1Sum >= pl2Sum){
-        return true
-    } else {
-        
-        st=0
-        end = nums.length-2
-        pl1=[]
-        pl2=[]
-        pl1ToPick = false
-        pl1.push(nums[end+1])
-        console.log('pl1 sta',pl1)
-        
-        while(st !== end){
+    if (nums.length === 1) return true
+    var max = helper(nums,0,nums.length-1)
+    console.log(max)
+    if (max >= 0) return true
+    return false
 
-            if (pl1ToPick){
-                pl1ToPick = false
-                if (nums[st] >= nums[end]){
-                    pl1.push(nums[st])
-                    st++
-                } else {
-                    pl1.push(nums[end])
-                    end --
-                }
-            } else {
-                pl1ToPick = true
-                if (nums[st] >= nums[end]){
-                    pl2.push(nums[st])
-                    st++
-                } else {
-                    pl2.push(nums[end])
-                    end --
-                }            
-            }
-        }        
-        
-        if (st === end){
-            if (pl1ToPick){
-                pl1.push(nums[st])
-            } else {
-                pl2.push(nums[st])
-            }
-        }
-        
-        console.log(pl1,pl2)
-
-
-        var pl1Sum = pl1.reduce((a,b) => a+b,0)
-        var pl2Sum = pl2.reduce((a,b) => a+b,0)
-
-        console.log(pl1Sum,pl2Sum)      
-        
-         if (pl1Sum >= pl2Sum){
-             return true
-         } else {
-             return false
-         }
-        
-    }
-    
 };
 
 
+function helper(nums,st,end) {
+    
+    if (st===end) {
+        return nums[end]
+    }
+    
+    var val1 = Math.max((nums[st]-helper(nums,st+1,end)),(nums[end]-helper(nums,st,end-1)))
+    return val1
+    
+}
 
 
 
-PredictTheWinner([1,5,233,7])
+//PredictTheWinner([1,1])
+
+
+/**
+ * @param {number[]} piles
+ * @return {boolean}
+ */
+
+var stoneGame = function(nums) {
+
+    if (nums.length === 1) return true
+    var memo = new Array(nums.length).fill().map(()=> new Array(nums.length).fill(-1))    
+    console.log(memo)
+    var max = helper(nums,0,nums.length-1,memo)
+    console.log(max)
+    if (max >= 0) return true
+    return false
+
+};
+
+
+function helper(nums,st,end,memo) {
+    
+    if (st===end) {
+        return nums[end]
+    }
+    
+    if (memo[st][end] !== -1){
+        return memo[st][end]
+    }
+    
+    memo[st][end] = Math.max((nums[st]-helper(nums,st+1,end,memo)),(nums[end]-helper(nums,st,end-1,memo)))
+    return memo[st][end]
+    
+}
+
+stoneGame([1,2,3])

@@ -20,7 +20,7 @@ Follow up: Could you improve it to O(n log n) time complexity?
 var lengthOfLIS = function(nums) {
     
     
-    return helper(nums,-1,0)
+    return helper(nums,1,0)
     
 };
 
@@ -45,7 +45,7 @@ function helper(nums,i,j){
 }
 
 //console.log(lengthOfLIS([10,9,2,5,3,7,101,18]))
-//console.log(lengthOfLIS([1,2,3]))
+console.log(lengthOfLIS([1,3,2]))
 
 
 
@@ -73,4 +73,4 @@ var lengthOfLISDP = function(nums) {
     console.log(Math.max(...dp),dp)
 };
 
-lengthOfLISDP([1,3,6,7,9,4,10,5,6])
+//lengthOfLISDP([1,3,6,7,9,4,10,5,6])

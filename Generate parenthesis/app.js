@@ -31,4 +31,39 @@ var generateValidParanthesis = function(open,close,result,s){
         
 }
 
-generateParenthesis(3);
+//generateParenthesis(3);
+
+
+
+var generateParenthesis1 = function(n) {
+    var result =[];
+    var s =""
+    generateValidParanthesis1(n,n,result,s);
+    console.log(result);
+};
+
+var generateValidParanthesis1 = function(open,close,result,s){
+
+        console.log("open :" + open);
+    console.log("close :" + close);
+    console.log("s :"+ s);
+    if (open === 0 && close === 0) {
+        console.log('final :' + result);
+        return result.push(s);
+    }
+
+    if (open > close) {
+        return
+    }
+    
+    if (open > 0){
+        generateValidParanthesis1(open-1,close,result,s+'(');
+    }
+    
+    if (close > 0) {
+        generateValidParanthesis1(open,close-1,result,s+')');        
+    }
+            
+}
+
+generateParenthesis1(3)

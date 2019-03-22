@@ -158,4 +158,33 @@ var longestValidParentheses = function (s){
 }
 
 
-console.log(longestValidParentheses(")()())"))
+//console.log(longestValidParentheses(")()())"))
+
+
+var longestValidParentheses1 = function(s) {
+    
+    var stack=[],rightpos,max=0,empvar=-1
+    
+    for (var i=0;i<s.length;i++){
+        
+        if (s[i]=== '('){
+            stack.push(i)
+        } else {
+            if (stack.length !== 0) {
+                rightpos = i
+                stack.pop()
+                if (stack.length === 0){
+                    max = Math.max(max,rightpos - empvar)
+                } else {
+                    max= Math.max(max, rightpos - stack[stack.length-1])
+                }
+            } else {
+                empvar = i
+            }
+            
+        }
+    }
+      
+    return max
+    
+};

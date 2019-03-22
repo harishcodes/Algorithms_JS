@@ -89,22 +89,16 @@ function helper(s,start,end,max,res){
 }
 
 
-console.log(longestPalindrome('babad'))
+//console.log(longestPalindrome('babad'))
 
 
 
 
 function test(){
-    var var1 = 'harish'
-    var obj = {
-        
-    }
+    var arr =[[4,6],[2,3]]
     
-    obj.sample=[var1]
-    
-    obj.sample1 = obj.sample.push('ram').map((val) => {return val})
-    
-    console.log(obj)
+    arr.sort((a,b)=> a[0]-b[0])
+    console.log(arr)
 }
 
 test()
