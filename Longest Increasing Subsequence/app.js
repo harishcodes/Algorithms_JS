@@ -45,7 +45,7 @@ function helper(nums,i,j){
 }
 
 //console.log(lengthOfLIS([10,9,2,5,3,7,101,18]))
-console.log(lengthOfLIS([1,3,2]))
+//console.log(lengthOfLIS([1,3,2]))
 
 
 
@@ -74,3 +74,32 @@ var lengthOfLISDP = function(nums) {
 };
 
 //lengthOfLISDP([1,3,6,7,9,4,10,5,6])
+
+
+
+
+
+var lenLIS = function(nums) {
+    let res=0,memo=new Array(nums.length).fill(-1)
+    for (let i=0;i< nums.length;i++){
+        res = Math.max(res,looper(nums,i,memo))
+    }
+    
+    console.log('res',res)
+}
+
+function looper(nums,i,memo) {
+    if (memo[i] !== -1) {
+        return memo[i]
+    }
+    let res1=1
+    for (let j=0;j<i;j++) {
+        if (nums[j] < nums[i]) {
+            res1 = Math.max(res1, 1+looper(nums,j,memo))
+        }
+    }
+    memo[i] = res1
+    return memo[i]
+}
+
+lenLIS([10,9,2,5,3,7,101,18])
